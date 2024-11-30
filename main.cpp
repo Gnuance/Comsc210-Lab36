@@ -29,18 +29,21 @@ int main()
     }
     else
     {
+        timerStart = high_resolution_clock::now();
         // Get each line and store in BST
         while (getline(inputFile, fileLine))
         {
             bTree.insertNode(fileLine);
             lineCount++;
         }
+        timerEnd = high_resolution_clock::now();
+        elapsed = timerEnd - timerStart;
 
         // CLOSE THE F-ING FILE
         inputFile.close();
     }
 
-    cout << "Total lines: " << lineCount << endl;
+    cout << "Total lines: " << lineCount << "\nTotal time: " << elapsed.count() << " ms" << endl;
 
     return 0;
 }

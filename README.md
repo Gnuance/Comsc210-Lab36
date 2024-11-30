@@ -5,10 +5,11 @@
     3. Add interactive, menu-driven functionality to add, delete, search, and modify records.
 
 ## Initial thoughts
-    + 
+    + Converting to strings from ints shouldn't be too hard; standard string comparison is included by default with the language.
 
 ## Design Decisions
      
 
 ## Completion Updates
+    + Converted binary tree declaration & definition files to string from int.
     

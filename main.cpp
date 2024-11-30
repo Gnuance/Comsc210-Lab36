@@ -34,7 +34,7 @@ int main()
     //     inputFile.close();
     // }
 
-    // bTree.insertNode("Hello");
+    bTree->insertNode("Hello");
 
     // cout << "Total lines: " << lineCount << endl;
 

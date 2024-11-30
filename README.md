@@ -13,5 +13,7 @@
 ## Completion Updates
     + Converted binary tree declaration & definition files to string from int.
     + Started working on inserting each line from input file into BST.
-    
+    + VsCode once again needed tasks.json modified to compile all files within directory
+        - In case you need it: "args": ["-fdiagnostics-color=always","-g","${fileDirname}/*.cpp","-o","${fileDirname}/${fileBasenameNoExtension}"],
+    +
     

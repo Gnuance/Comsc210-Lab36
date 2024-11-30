@@ -2,8 +2,10 @@
 
 #include <iostream>
 #include <fstream>
+#include <chrono> // For fun to test program speed
 #include "StringBinaryTree.h"
 using namespace std;
+using namespace std::chrono; // So chrono:: doesn't have to be used over and over again
 
 int main()
 {
@@ -13,30 +15,32 @@ int main()
     string fileLine = "";
     size_t lineCount = 0;
     // Binary Tree
-    StringBinaryTree *bTree;
+    StringBinaryTree bTree;
+    // Timers to test program speed
+    high_resolution_clock::time_point timerStart;
+    high_resolution_clock::time_point timerEnd;
+    duration<double, milli> elapsed;
 
     // Try opening file and output error to console if file is no good
-    // inputFile.open(INPUT_FILE_NAME);
-    // if (!inputFile)
-    // {
-    //     throw runtime_error("Error opening file: " + INPUT_FILE_NAME);
-    // }
-    // else
-    // {
-    //     // Get each line and store in BST
-    //     while (getline(inputFile, fileLine))
-    //     {
-    //         bTree.insertNode(fileLine);
-    //         lineCount++;
-    //     }
+    inputFile.open(INPUT_FILE_NAME);
+    if (!inputFile)
+    {
+        throw runtime_error("Error opening file: " + INPUT_FILE_NAME);
+    }
+    else
+    {
+        // Get each line and store in BST
+        while (getline(inputFile, fileLine))
+        {
+            bTree.insertNode(fileLine);
+            lineCount++;
+        }
 
-    //     // CLOSE THE F-ING FILE
-    //     inputFile.close();
-    // }
+        // CLOSE THE F-ING FILE
+        inputFile.close();
+    }
 
-    bTree->insertNode("Hello");
-
-    // cout << "Total lines: " << lineCount << endl;
+    cout << "Total lines: " << lineCount << endl;
 
     return 0;
 }

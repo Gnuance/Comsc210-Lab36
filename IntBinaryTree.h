@@ -1,3 +1,5 @@
+// Binary tree converted from tree of int to string
+
 // Specification file for the IntBinaryTree class
 #ifndef INTBINARYTREE_H
 #define INTBINARYTREE_H

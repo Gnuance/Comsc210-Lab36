@@ -12,4 +12,6 @@
 
 ## Completion Updates
     + Converted binary tree declaration & definition files to string from int.
+    + Started working on inserting each line from input file into BST.
+    
     

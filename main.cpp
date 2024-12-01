@@ -10,7 +10,7 @@ using namespace std::chrono; // So chrono:: doesn't have to be used over and ove
 int main_menu();                      // Outputs prompt and collects user selection
 bool isValidOption(string, int, int); // Helper function to validate user input
 void AddNode(StringBinaryTree &);     // Adds a node to passed binary tree
-void DeleteNode(StringBinaryTree &);  // Deletes a node ofthe  passed binary tree
+void RemoveNode(StringBinaryTree &);  // Deletes a node ofthe  passed binary tree
 void SearchNode(StringBinaryTree &);  // Searches for a node from passed binary tree
 void ModifyNode(StringBinaryTree &);  // Modifies a node of the passed binary tree
 
@@ -65,7 +65,7 @@ int main()
             break;
         case 2:
             // Takes user to function to delete a given text string within tree
-            DeleteNode(bTree);
+            RemoveNode(bTree);
             break;
         case 3:
             // Takes user to function to search for a given text string within tree
@@ -138,11 +138,45 @@ bool isValidOption(string userInput, int minOption, int maxOption)
 }
 
 // Adds a node to passed binary tree
-void AddNode(StringBinaryTree &tree){
+void AddNode(StringBinaryTree &tree)
+{
     string userInput = "";
     cout << "Please enter string to add to tree (Leave empty to cancel operation): ";
+    getline(cin, userInput);
+    // Guard against empty string and return
+    if (userInput == "")
+    {
+        cout << "Operation Cancelled." << endl;
+        return;
+    }
+    // Insert user value into tree
+    tree.insertNode(userInput);
+    cout << "String: " << userInput << " inserted into tree." << endl;
+}
 
-} 
-void DeleteNode(StringBinaryTree &); // Deletes a node ofthe  passed binary tree
+// Remove a node selected by user within the passed binary tree
+void RemoveNode(StringBinaryTree &tree)
+{
+    string userInput = "";
+    cout << "Please enter string to remove from tree (Leave empty to cancel operation): ";
+    getline(cin, userInput);
+    // Guard against empty string and return
+    if (userInput == "")
+    {
+        cout << "Operation Cancelled." << endl;
+        return;
+    }
+    // Check if node exists and remove
+    if (!tree.searchNode(userInput))
+    {
+        cout << userInput << " not found. Operation Cancelled." << endl;
+        return;
+    }
+    
+    tree.remove(userInput);
+    cout << "String: " << userInput << " removed from tree." << endl;
+}
+
+
 void SearchNode(StringBinaryTree &); // Searches for a node from passed binary tree
 void ModifyNode(StringBinaryTree &); // Modifies a node of the passed binary tree

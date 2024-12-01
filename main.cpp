@@ -7,8 +7,12 @@
 using namespace std;
 using namespace std::chrono; // So chrono:: doesn't have to be used over and over again
 
-int main_menu();                      // outputs prompt and collects user selection
-bool isValidOption(string, int, int); // helper function to validate user input
+int main_menu();                      // Outputs prompt and collects user selection
+bool isValidOption(string, int, int); // Helper function to validate user input
+void AddNode(StringBinaryTree *&);    // Adds a node to passed binary tree
+void DeleteNode(StringBinaryTree *&); // Deletes a node ofthe  passed binary tree
+void SearchNode(StringBinaryTree *&); // Searches for a node from passed binary tree
+void ModifyNode(StringBinaryTree *&); // Modifies a node of the passed binary tree
 
 int main()
 {
@@ -47,7 +51,7 @@ int main()
     }
 
     // prompt user for selection and input
-    // user selection 5 is the program exit code
+    // user selection 0 is the program exit code
     int userSelectedOption;
     do
     {
@@ -94,12 +98,11 @@ int main_menu()
     do
     {
         // output prompt
-        cout << "\nVPN: Network Menu" << "\n"
-             << "[1] Display Bandwidth Summary" << "\n"
-             << "[2] Default Proxy Map [BFS]" << "\n"
-             << "[3] Test Network Nodes [DFS]" << "\n"
-             << "[4] Display Minimum Bandwidth From Source" << "\n"
-             << "[5] MST: Minimum Spanning Tree For Network" << "\n"
+        cout << "\nBST: Management Menu" << "\n"
+             << "[1] Add node" << "\n"
+             << "[2] Delete node" << "\n"
+             << "[3] Search for string" << "\n"
+             << "[4] Modify node" << "\n"
              << "[0] Quit" << "\n"
              << "Choice --> ";
         getline(cin, userInput); // get user input as string and test

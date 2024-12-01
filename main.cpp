@@ -9,10 +9,10 @@ using namespace std::chrono; // So chrono:: doesn't have to be used over and ove
 
 int main_menu();                      // Outputs prompt and collects user selection
 bool isValidOption(string, int, int); // Helper function to validate user input
-void AddNode(StringBinaryTree *&);    // Adds a node to passed binary tree
-void DeleteNode(StringBinaryTree *&); // Deletes a node ofthe  passed binary tree
-void SearchNode(StringBinaryTree *&); // Searches for a node from passed binary tree
-void ModifyNode(StringBinaryTree *&); // Modifies a node of the passed binary tree
+void AddNode(StringBinaryTree &);     // Adds a node to passed binary tree
+void DeleteNode(StringBinaryTree &);  // Deletes a node ofthe  passed binary tree
+void SearchNode(StringBinaryTree &);  // Searches for a node from passed binary tree
+void ModifyNode(StringBinaryTree &);  // Modifies a node of the passed binary tree
 
 int main()
 {
@@ -27,6 +27,8 @@ int main()
     high_resolution_clock::time_point timerStart;
     high_resolution_clock::time_point timerEnd;
     duration<double, milli> elapsed;
+    // Variable for user selection for main menu
+    int userSelectedOption;
 
     // Try opening file and output error to console if file is no good
     inputFile.open(INPUT_FILE_NAME);
@@ -50,33 +52,28 @@ int main()
         inputFile.close();
     }
 
-    // prompt user for selection and input
-    // user selection 0 is the program exit code
-    int userSelectedOption;
+    // Prompt user for selection and input
+    // User selection 0 is the program exit code
     do
     {
         userSelectedOption = main_menu();
         switch (userSelectedOption)
         {
         case 1:
-            // Prints adjacency list representation of graph
-            graph.printGraph();
+            // Takes user to function to add a given text string
+            AddNode(bTree);
             break;
         case 2:
-            // Breadth first search from node 0
-            graph.BFS(startingNode);
+            // Takes user to function to delete a given text string within tree
+            DeleteNode(bTree);
             break;
         case 3:
-            // Depth first search from node 0
-            graph.DFS(startingNode);
+            // Takes user to function to search for a given text string within tree
+            SearchNode(bTree);
             break;
         case 4:
-            // STEP 4 -- Shortest paths through graph from node 0
-            graph.printShortestPathsWithDetails(startingNode);
-            break;
-        case 5:
-            // STEP 5 -- MST using Prim's Algorithm
-            graph.primMST(startingNode);
+            // Takes user to function to modify a given text string
+            ModifyNode(bTree);
             break;
         default:
             break;
@@ -107,7 +104,7 @@ int main_menu()
              << "Choice --> ";
         getline(cin, userInput); // get user input as string and test
         cout << endl;
-    } while (!isValidOption(userInput, 0, 5));
+    } while (!isValidOption(userInput, 0, 4));
 
     // if isValidOption passed, stoi(userInput) has already been tested and is safe
     return stoi(userInput);
@@ -139,3 +136,13 @@ bool isValidOption(string userInput, int minOption, int maxOption)
 
     return true;
 }
+
+// Adds a node to passed binary tree
+void AddNode(StringBinaryTree &tree){
+    string userInput = "";
+    cout << "Please enter string to add to tree (Leave empty to cancel operation): ";
+
+} 
+void DeleteNode(StringBinaryTree &); // Deletes a node ofthe  passed binary tree
+void SearchNode(StringBinaryTree &); // Searches for a node from passed binary tree
+void ModifyNode(StringBinaryTree &); // Modifies a node of the passed binary tree

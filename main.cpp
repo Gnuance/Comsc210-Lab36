@@ -137,6 +137,30 @@ bool isValidOption(string userInput, int minOption, int maxOption)
     return true;
 }
 
+// Helper function to return validated yes/no option from user
+bool isYesNo(string userInput, int minOption, int maxOption)
+{
+    int selectedOption = 0;
+    try
+    {
+        selectedOption = stoi(userInput);
+    }
+    catch (const std::exception &e)
+    {
+        cout << "Invalid input: Please enter a valid integer." << "\n\n";
+        return false;
+    }
+
+    // if userInput is an int but outside expected range
+    if (selectedOption < minOption || selectedOption > maxOption)
+    {
+        cout << "Invalid input: Please enter an integer between " << minOption << " and " << maxOption << "." << "\n\n";
+        return false;
+    }
+
+    return true;
+}
+
 // Adds a node to passed binary tree
 void AddNode(StringBinaryTree &tree)
 {
@@ -172,11 +196,57 @@ void RemoveNode(StringBinaryTree &tree)
         cout << userInput << " not found. Operation Cancelled." << endl;
         return;
     }
-    
+
     tree.remove(userInput);
     cout << "String: " << userInput << " removed from tree." << endl;
 }
 
+// Searches for a node selected by user within the passed binary tree
+void SearchNode(StringBinaryTree &tree)
+{
+    string userInput = "";
+    cout << "Please enter string to search for in tree (Leave empty to cancel operation): ";
+    getline(cin, userInput);
+    // Guard against empty string and return
+    if (userInput == "")
+    {
+        cout << "Operation Cancelled." << endl;
+        return;
+    }
+    // Check if node exists and remove
+    if (!tree.searchNode(userInput))
+    {
+        cout << userInput << " NOT found in tree." << endl;
+    }
+    else
+    {
+        cout << userInput << " FOUND in tree." << endl;
+    }
+}
 
-void SearchNode(StringBinaryTree &); // Searches for a node from passed binary tree
-void ModifyNode(StringBinaryTree &); // Modifies a node of the passed binary tree
+// Allows user to modify a node selected by user within the passed binary tree
+void ModifyNode(StringBinaryTree &tree)
+{
+    string userInput = "";
+    string userOption = "";
+    cout << "Please enter string to modify in tree (Leave empty to cancel operation): ";
+    getline(cin, userInput);
+    // Guard against empty string and return
+    if (userInput == "")
+    {
+        cout << "Operation Cancelled." << endl;
+        return;
+    }
+
+    // Check if node even exists
+    if (!tree.searchNode(userInput))
+    {
+        cout << userInput << " NOT found in tree. Would you like to add it (y/n): ";
+        getline(cin, userOption);
+
+    }
+    else
+    {
+        cout << userInput << " FOUND in tree." << endl;
+    }
+}

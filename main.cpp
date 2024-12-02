@@ -144,6 +144,7 @@ bool isValidOption(string userInput, int minOption, int maxOption)
 // Helper function to return validated yes/no option from user
 char IsYesNo(string userInput)
 {
+    // Transform to lower to compare regardless of case
     string input = userInput;
     transform(input.begin(), input.end(), input.begin(),
               [](unsigned char c)
@@ -157,9 +158,7 @@ char IsYesNo(string userInput)
     {
         return 'n';
     }
-
-
-    return true;
+    return '0'; // Return 0 if no option selected
 }
 
 // Adds a node to passed binary tree

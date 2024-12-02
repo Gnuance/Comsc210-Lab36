@@ -2,7 +2,10 @@
 
 #include <iostream>
 #include <fstream>
-#include <chrono> // For fun to test program speed
+#include <chrono>    // For fun to test program speed
+#include <algorithm> // transform
+#include <cctype>    // tolower
+#include <string>
 #include "StringBinaryTree.h"
 using namespace std;
 using namespace std::chrono; // So chrono:: doesn't have to be used over and over again
@@ -141,22 +144,14 @@ bool isValidOption(string userInput, int minOption, int maxOption)
 // Helper function to return validated yes/no option from user
 char IsYesNo(string userInput)
 {
-    int selectedOption = 0;
-    try
-    {
-        selectedOption = stoi(userInput);
-    }
-    catch (const std::exception &e)
-    {
-        cout << "Invalid input: Please enter a valid integer." << "\n\n";
-        return false;
-    }
-
+    string input = userInput;
+    transform(input.begin(), input.end(), input.begin(),
+              [](unsigned char c)
+              { return tolower(c); });
     // if userInput is an int but outside expected range
-    if (selectedOption < minOption || selectedOption > maxOption)
+    if (input == "yes" || input == "y")
     {
-        cout << "Invalid input: Please enter an integer between " << minOption << " and " << maxOption << "." << "\n\n";
-        return false;
+        return 'y';
     }
 
     return true;

@@ -9,6 +9,7 @@ using namespace std::chrono; // So chrono:: doesn't have to be used over and ove
 
 int main_menu();                      // Outputs prompt and collects user selection
 bool isValidOption(string, int, int); // Helper function to validate user input
+char IsYesNo(string);                 // Helper function to validate user input
 void AddNode(StringBinaryTree &);     // Adds a node to passed binary tree
 void RemoveNode(StringBinaryTree &);  // Deletes a node ofthe  passed binary tree
 void SearchNode(StringBinaryTree &);  // Searches for a node from passed binary tree
@@ -138,7 +139,7 @@ bool isValidOption(string userInput, int minOption, int maxOption)
 }
 
 // Helper function to return validated yes/no option from user
-bool isYesNo(string userInput, int minOption, int maxOption)
+char IsYesNo(string userInput)
 {
     int selectedOption = 0;
     try
@@ -175,7 +176,7 @@ void AddNode(StringBinaryTree &tree)
     }
     // Insert user value into tree
     tree.insertNode(userInput);
-    cout << "String: " << userInput << " inserted into tree." << endl;
+    cout << "String: \"" << userInput << "\" inserted into tree." << endl;
 }
 
 // Remove a node selected by user within the passed binary tree
@@ -193,12 +194,12 @@ void RemoveNode(StringBinaryTree &tree)
     // Check if node exists and remove
     if (!tree.searchNode(userInput))
     {
-        cout << userInput << " not found. Operation Cancelled." << endl;
+        cout << "\"" << userInput << "\" not found. Operation Cancelled." << endl;
         return;
     }
 
     tree.remove(userInput);
-    cout << "String: " << userInput << " removed from tree." << endl;
+    cout << "String: \"" << userInput << "\" removed from tree." << endl;
 }
 
 // Searches for a node selected by user within the passed binary tree
@@ -216,11 +217,11 @@ void SearchNode(StringBinaryTree &tree)
     // Check if node exists and remove
     if (!tree.searchNode(userInput))
     {
-        cout << userInput << " NOT found in tree." << endl;
+        cout << "\"" << userInput << "\" NOT found in tree." << endl;
     }
     else
     {
-        cout << userInput << " FOUND in tree." << endl;
+        cout << "\"" << userInput << "\" FOUND in tree." << endl;
     }
 }
 
@@ -241,9 +242,8 @@ void ModifyNode(StringBinaryTree &tree)
     // Check if node even exists
     if (!tree.searchNode(userInput))
     {
-        cout << userInput << " NOT found in tree. Would you like to add it (y/n): ";
+        cout << "\"" << userInput << "\" NOT found in tree. Would you like to add it (y/n): ";
         getline(cin, userOption);
-
     }
     else
     {

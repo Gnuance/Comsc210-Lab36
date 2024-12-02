@@ -13,6 +13,7 @@ using namespace std::chrono; // So chrono:: doesn't have to be used over and ove
 int main_menu();                      // Outputs prompt and collects user selection
 bool isValidOption(string, int, int); // Helper function to validate user input
 char IsYesNo(string);                 // Helper function to validate user input
+string Lowercase(string);             // Return lowercase string
 void AddNode(StringBinaryTree &);     // Adds a node to passed binary tree
 void RemoveNode(StringBinaryTree &);  // Deletes a node ofthe  passed binary tree
 void SearchNode(StringBinaryTree &);  // Searches for a node from passed binary tree
@@ -145,10 +146,7 @@ bool isValidOption(string userInput, int minOption, int maxOption)
 char IsYesNo(string userInput)
 {
     // Transform to lower to compare regardless of case
-    string input = userInput;
-    transform(input.begin(), input.end(), input.begin(),
-              [](unsigned char c)
-              { return tolower(c); });
+    string input = Lowercase(userInput);
     // Validate user input for yes, y
     if (input == "yes" || input == "y")
     {
@@ -159,6 +157,16 @@ char IsYesNo(string userInput)
         return 'n';
     }
     return '0'; // Return 0 if no option selected
+}
+
+// Return lowercase string
+string Lowercase(string userInput)
+{
+    string input = userInput;
+    transform(input.begin(), input.end(), input.begin(),
+              [](unsigned char c)
+              { return tolower(c); });
+    return input;
 }
 
 // Adds a node to passed binary tree
@@ -246,12 +254,12 @@ void ModifyNode(StringBinaryTree &tree)
         {
             cout << "\"" << userInput << "\" NOT found in tree. Would you like to add it (y/n): ";
             getline(cin, userOption);
-        } while (IsYesNo(userOption) == 0);
+        } while (userOption != "y" && userOption != "n");
 
         // If user doesn't want to add element into tree:
         if (IsYesNo(userOption) == 'n')
         {
-            cout << "\"" << userInput << "\" NOT inserted into tree.";
+            cout << "\"" << userInput << "\" NOT inserted into tree." << endl;
             return;
         }
         // Insert user value into tree

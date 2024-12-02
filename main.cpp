@@ -229,6 +229,7 @@ void ModifyNode(StringBinaryTree &tree)
 {
     string userInput = "";
     string userOption = "";
+    string newUserInput = "";
     cout << "Please enter string to modify in tree (Leave empty to cancel operation): ";
     getline(cin, userInput);
     // Guard against empty string and return
@@ -241,11 +242,35 @@ void ModifyNode(StringBinaryTree &tree)
     // Check if node even exists
     if (!tree.searchNode(userInput))
     {
-        cout << "\"" << userInput << "\" NOT found in tree. Would you like to add it (y/n): ";
-        getline(cin, userOption);
+        do
+        {
+            cout << "\"" << userInput << "\" NOT found in tree. Would you like to add it (y/n): ";
+            getline(cin, userOption);
+        } while (IsYesNo(userOption) == 0);
+
+        // If user doesn't want to add element into tree:
+        if (IsYesNo(userOption) == 'n')
+        {
+            cout << "\"" << userInput << "\" NOT inserted into tree.";
+            return;
+        }
+        // Insert user value into tree
+        tree.insertNode(userInput);
+        cout << "String: \"" << userInput << "\" inserted into tree." << endl;
     }
-    else
+    else // Node exists, allow user to modify
     {
-        cout << userInput << " FOUND in tree." << endl;
+        cout << "\"" << userInput << "\" FOUND in tree. Please enter new value (Leave empty to cancel operation):" << endl;
+        getline(cin, newUserInput);
+        // Guard against empty string and return
+        if (newUserInput == "")
+        {
+            cout << "Operation Cancelled." << endl;
+            return;
+        }
+        // User has given new value, delete old and insert new into tree
+        tree.remove(userInput);
+        tree.insertNode(newUserInput);
+        cout << "\"" << userInput << "\" REMOVED from tree. \"" << newUserInput << "\" added." << endl;
     }
 }

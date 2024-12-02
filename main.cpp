@@ -148,11 +148,16 @@ char IsYesNo(string userInput)
     transform(input.begin(), input.end(), input.begin(),
               [](unsigned char c)
               { return tolower(c); });
-    // if userInput is an int but outside expected range
+    // Validate user input for yes, y
     if (input == "yes" || input == "y")
     {
         return 'y';
     }
+    if (input == "no" || input == "n")
+    {
+        return 'n';
+    }
+
 
     return true;
 }

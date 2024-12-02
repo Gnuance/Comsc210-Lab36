@@ -18,5 +18,7 @@
         - Add, delete and search shouldn't be too hard because methods are already built, but modification will require deletion + insert.
 
 ## Issues/Bugs
-    + VsCode once again needed tasks.json modified to compile all files within directory
+    + VsCode once again needed tasks.json modified to compile all files within directory.
         - In case you need it: "args": ["-fdiagnostics-color=always","-g","${fileDirname}/*.cpp","-o","${fileDirname}/${fileBasenameNoExtension}"],
+    + IsYesNo() functionality not working because Lowercase() transform function not working.
+        - Worked around by requiring user to enter simple char 'y' || 'n'.
